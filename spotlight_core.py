@@ -6,10 +6,10 @@ import numpy as np
 class Spotlight:
     def __init__(self):
         self.cap = None
-        # Only use frontal face cascade
+    
         self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
-        # Simple smoothing
+        # smoothing
         self.prev_box = None
         self.smooth_factor = 0.3
 
@@ -30,7 +30,7 @@ class Spotlight:
             self.prev_box = current_box
             return current_box
 
-        # Simple linear interpolation
+        # linear interpolation
         x1, y1, w1, h1 = self.prev_box
         x2, y2, w2, h2 = current_box
 
@@ -50,7 +50,7 @@ class Spotlight:
         if not ret:
             return self.last_valid_frame if self.last_valid_frame is not None else None
 
-        # Flip frame horizontally for mirror effect
+        # for mirror effect
         frame = cv2.flip(frame, 1)
 
         # Convert to grayscale for face detection
